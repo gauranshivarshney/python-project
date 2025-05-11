@@ -17,6 +17,10 @@ COLLECTION_NAME = "video_frames"
 os.makedirs(FRAME_DIR, exist_ok=True)
 init_qdrant(COLLECTION_NAME)
 
+@app.get("/")
+def root():
+    return {"message": "Video Search API is running"}
+
 @app.post("/upload/")
 async def upload_video(file: UploadFile = File(...), interval: int = Form(1)):
     video_id = str(uuid.uuid4())
